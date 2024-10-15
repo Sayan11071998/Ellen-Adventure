@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D playerBoxCollider2d;
     [SerializeField] private Rigidbody2D playerRigidBody2d;
+    [SerializeField] private ScoreController scoreController;
     [SerializeField] private float playerHorizontalSpeed;
     [SerializeField] private float playerVerticalJumpHeight;
 
@@ -32,20 +33,11 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Jump");
 
-        MoveCharacterHorizontally(horizontalInput, verticalInput);
+        PlayerMovement(horizontalInput, verticalInput);
         PlayMovementAnimation(horizontalInput, verticalInput);
-
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            PlayCrouchAnimation(true);
-        }
-        else
-        {
-            PlayCrouchAnimation(false);
-        }
     }
 
-    public void MoveCharacterHorizontally(float horizontalInput, float verticalInput)
+    public void PlayerMovement(float horizontalInput, float verticalInput)
     {
         // Move Character Horizontally
         Vector3 position = transform.position;
@@ -73,6 +65,16 @@ public class PlayerController : MonoBehaviour
             localScale.x = Mathf.Abs(localScale.x);
         }
         transform.localScale = localScale;
+
+        // Crouch
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            PlayCrouchAnimation(true);
+        }
+        else
+        {
+            PlayCrouchAnimation(false);
+        }
 
         // Jump
         if (verticalInput > 0)
@@ -105,5 +107,12 @@ public class PlayerController : MonoBehaviour
         }
 
         playerAnimator.SetBool("Crouch", crouchValue);
+    }
+
+    // Key Pickup
+    public void PickupKey()
+    {
+        Debug.Log("Player picked up the Key!!");
+        scoreController.IncreaseScore(10);
     }
 }
