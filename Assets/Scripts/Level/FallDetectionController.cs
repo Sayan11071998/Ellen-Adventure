@@ -13,8 +13,8 @@ public class FallDetectionController : MonoBehaviour
         if (playerController != null)
         {
             Debug.Log("Player Fell off!!");
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneIndex);
         }
     }
 }
