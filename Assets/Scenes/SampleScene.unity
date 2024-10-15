@@ -2201,6 +2201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08cbf2b1bd485b449adbdf5f0dec1b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
 --- !u!1001 &1212606190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2578,6 +2579,12 @@ MonoBehaviour:
 --- !u!4 &1559855050 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1505907749121283374, guid: beb39d30373660f43ae1f7b9dd003dd8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5443937537088975221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1559855054 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7142720104902657659, guid: beb39d30373660f43ae1f7b9dd003dd8,
     type: 3}
   m_PrefabInstance: {fileID: 5443937537088975221}
   m_PrefabAsset: {fileID: 0}
@@ -3236,6 +3243,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 876252369875952975, guid: beb39d30373660f43ae1f7b9dd003dd8,
+        type: 3}
+      propertyPath: keyRenderer
+      value: 
+      objectReference: {fileID: 1559855054}
+    - target: {fileID: 876252369875952975, guid: beb39d30373660f43ae1f7b9dd003dd8,
+        type: 3}
+      propertyPath: keyMoveUpSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 876252369875952975, guid: beb39d30373660f43ae1f7b9dd003dd8,
+        type: 3}
+      propertyPath: keyFadeOutSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 876252369875952975, guid: beb39d30373660f43ae1f7b9dd003dd8,
+        type: 3}
+      propertyPath: keyMoveUpDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1505907749121283374, guid: beb39d30373660f43ae1f7b9dd003dd8,
         type: 3}
