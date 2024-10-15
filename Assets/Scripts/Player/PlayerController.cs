@@ -13,7 +13,13 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 boxColInitSize;
     private Vector2 boxColInitOffset;
-    private bool isGrounded = false;
+
+    // private bool isGrounded = false;
+
+    private void Awake()
+    {
+        playerRigidBody2d = gameObject.GetComponent<Rigidbody2D>();
+    }
 
     private void Start()
     {
@@ -47,7 +53,8 @@ public class PlayerController : MonoBehaviour
         transform.position = position;
 
         // Move Character Vertically
-        if(verticalInput > 0){
+        if (verticalInput > 0)
+        {
             playerRigidBody2d.AddForce(new Vector2(0f, playerVerticalJumpHeight), ForceMode2D.Force);
         }
     }
