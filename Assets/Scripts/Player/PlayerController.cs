@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D playerBoxCollider2d;
     [SerializeField] private Rigidbody2D playerRigidBody2d;
-    [SerializeField] private ScoreController scoreController;
+    [SerializeField] private GameUIController gameUIController;
     [SerializeField] private float playerHorizontalSpeed;
     [SerializeField] private float playerVerticalJumpHeight;
+    [SerializeField] private int playerMaxNumberOfHealths;
 
+    private int currentHealth;
     private Vector2 boxColInitSize;
     private Vector2 boxColInitOffset;
 
@@ -114,18 +116,40 @@ public class PlayerController : MonoBehaviour
     public void PickupKey()
     {
         Debug.Log("Player picked up the Key!!");
-        scoreController.IncreaseScore(10);
+        gameUIController.IncreaseScore(10);
     }
 
-    public void KillPlayer(){
+    public void DecreasePlayerHealth(int damageVaue)
+    {
+        playerMaxNumberOfHealths -= damageVaue;
+        CheckPlayerDeathCondition();
+    }
+
+    public void CheckPlayerDeathCondition()
+    {
+        if (playerMaxNumberOfHealths < 1)
+        {
+            KillPlayer();
+        }
+    }
+
+    public void KillPlayer()
+    {
         Debug.Log("Player Killed by Enemy!!");
         // Destroy(gameObject);
         // Play Death Animation
         // Reset the Level
+
         ReloadLevel();
     }
 
-    public void ReloadLevel(){
+    public int getPlayerLives()
+    {
+        return playerMaxNumberOfHealths;
+    }
+
+    public void ReloadLevel()
+    {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }

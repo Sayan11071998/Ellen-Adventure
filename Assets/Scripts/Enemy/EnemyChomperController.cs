@@ -33,7 +33,7 @@ public class EnemyChomperController : MonoBehaviour
 
         if (playerController != null)
         {
-            playerController.KillPlayer();
+            playerController.DecreasePlayerHealth(1);
         }
     }
 
