@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8772649209851299442}
   - component: {fileID: 5089065749084989248}
   - component: {fileID: 1909420321056461966}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyChomper
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2385680154902985592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}

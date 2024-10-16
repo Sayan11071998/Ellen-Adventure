@@ -196,6 +196,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 517080951013163290}
   playerBoxCollider2d: {fileID: 3152633872360189928}
   playerRigidBody2d: {fileID: 904073643294211633}
-  scoreController: {fileID: 0}
+  gameUIController: {fileID: 0}
   playerHorizontalSpeed: 10
   playerVerticalJumpHeight: 50
+  playerMaxNumberOfHealths: 3
