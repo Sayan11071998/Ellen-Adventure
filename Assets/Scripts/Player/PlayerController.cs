@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 
 public class PlayerController : MonoBehaviour
@@ -114,5 +115,18 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player picked up the Key!!");
         scoreController.IncreaseScore(10);
+    }
+
+    public void KillPlayer(){
+        Debug.Log("Player Killed by Enemy!!");
+        // Destroy(gameObject);
+        // Play Death Animation
+        // Reset the Level
+        ReloadLevel();
+    }
+
+    public void ReloadLevel(){
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }

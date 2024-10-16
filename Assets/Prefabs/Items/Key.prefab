@@ -116,7 +116,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.005740255, y: 0}
@@ -144,6 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cd566c3f7e4354d84969a54a1f951b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyMoveUpDistance: 7
+  keyMoveUpSpeed: 2
+  keyFadeOutSpeed: 1
+  keyRenderer: {fileID: 7142720104902657659}
 --- !u!95 &7496244482112575913
 Animator:
   serializedVersion: 5
