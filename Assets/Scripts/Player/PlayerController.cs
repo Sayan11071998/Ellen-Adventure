@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D playerBoxCollider2d;
     [SerializeField] private Rigidbody2D playerRigidBody2d;
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private GameUIController gameUIController;
     [SerializeField] private GameOverUIController gameOverUIController;
     [SerializeField] private LayerMask groundLayer;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator = gameObject.GetComponent<Animator>();
         playerBoxCollider2d = gameObject.GetComponent<BoxCollider2D>();
         playerRigidBody2d = gameObject.GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         gameUIController = FindObjectOfType<GameUIController>();
         // gameOverUIController = FindObjectOfType<GameOverUIController>();
     }
@@ -212,5 +214,14 @@ public class PlayerController : MonoBehaviour
     public int getPlayerLives()
     {
         return playerMaxNumberOfHealths;
+    }
+
+    public void DisablePlayerSprite()
+    {
+        this.enabled = false;
+        playerRigidBody2d.velocity = Vector2.zero;
+        playerRigidBody2d.isKinematic = true;
+        playerAnimator.enabled = false;
+        playerSpriteRenderer.enabled = false;
     }
 }

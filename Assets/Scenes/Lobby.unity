@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5129605f6c15842921289e1b0e7b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
   LevelName: Scene_1
 --- !u!1 &338101413
 GameObject:
@@ -982,6 +983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5129605f6c15842921289e1b0e7b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
   LevelName: Scene_5
 --- !u!1 &772533612
 GameObject:
@@ -1104,6 +1106,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772533612}
   m_CullTransparentMesh: 1
+--- !u!1 &825742515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 825742517}
+  - component: {fileID: 825742516}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &825742516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825742515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8eeb9b5a150a754295ffdafd06d5a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Levels:
+  - Scene_1
+  - Scene_2
+  - Scene_3
+  - Scene_4
+  - Scene_5
+--- !u!4 &825742517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825742515}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &831582717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5129605f6c15842921289e1b0e7b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
   LevelName: Scene_2
 --- !u!1 &837908143
 GameObject:
@@ -1909,6 +1962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5129605f6c15842921289e1b0e7b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
   LevelName: Scene_4
 --- !u!1 &1394150035
 GameObject:
@@ -2246,6 +2300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5129605f6c15842921289e1b0e7b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 0}
   LevelName: Scene_3
 --- !u!1 &2056998231
 GameObject:
@@ -2521,3 +2576,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 529144855}
   - {fileID: 1394150038}
+  - {fileID: 825742517}
