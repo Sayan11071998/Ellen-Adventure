@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelCompleteController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class LevelCompleteController : MonoBehaviour
         if (playerController != null)
         {
             Debug.Log("Level Completed!!");
+            playerController.DisablePlayerSprite();
+            LevelManager.Instance.MarkCurrentLevelComplete();
         }
     }
 }
