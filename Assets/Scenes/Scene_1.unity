@@ -2857,6 +2857,11 @@ PrefabInstance:
       propertyPath: gameOverUIController
       value: 
       objectReference: {fileID: 297011337}
+    - target: {fileID: 7452623053172902468, guid: 61f45004cf7649c41be956d51d949fa4,
+        type: 3}
+      propertyPath: playerVerticalJumpHeight
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5071,7 +5076,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1998675696435761701}
   - component: {fileID: 4640184855593897653}
-  - component: {fileID: 4165667551582880401}
   - component: {fileID: 4640184855593897654}
   m_Layer: 0
   m_Name: Main Camera
@@ -5080,14 +5084,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &4165667551582880401
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2291001989077379591}
-  m_Enabled: 1
 --- !u!20 &4640184855593897653
 Camera:
   m_ObjectHideFlags: 0

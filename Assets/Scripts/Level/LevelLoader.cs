@@ -23,12 +23,15 @@ public class LevelLoader : MonoBehaviour
         switch (levelStatus)
         {
             case LevelStatus.LOCKED:
+
                 Debug.Log("Can't play this Level till you unlock it");
                 break;
             case LevelStatus.UNLOCKED:
+                AudioManager.Instance.PlaySFX(AudioTypeList.buttonMenuClick);
                 SceneManager.LoadScene(LevelName);
                 break;
             case LevelStatus.COMPLETED:
+                AudioManager.Instance.PlaySFX(AudioTypeList.buttonMenuClick);
                 SceneManager.LoadScene(LevelName);
                 break;
         }

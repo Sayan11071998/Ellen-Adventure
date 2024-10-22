@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, groundLayer);
         if (Input.GetButton("Jump") && isGrounded)
         {
             PlayerJump();
@@ -84,6 +85,8 @@ public class PlayerController : MonoBehaviour
             localScale.x = Mathf.Abs(localScale.x);
         }
         transform.localScale = localScale;
+
+        AudioManager.Instance.PlayPlayerWalkAudio(AudioTypeList.playerFootstep);
     }
 
     public void PlayerJump()
@@ -91,6 +94,7 @@ public class PlayerController : MonoBehaviour
         playerRigidBody2d.velocity = new Vector2(playerRigidBody2d.velocity.x, playerVerticalJumpHeight);
         isGrounded = false;
         playerAnimator.SetBool("Jump", true);
+        AudioManager.Instance.PlayPlayerJumpAudio(AudioTypeList.PlayerJump);
     }
 
     public void PlayerGroundedCheck()
@@ -198,7 +202,9 @@ public class PlayerController : MonoBehaviour
     public void PlayDeathAnimation()
     {
         Debug.Log("Play Death Animation");
-        playerAnimator.SetBool("isDead", true);
+        // playerAnimator.SetBool("isDead", true);
+        playerAnimator.SetTrigger("Dead");
+        AudioManager.Instance.PlayPlayerDeathAudio(AudioTypeList.PlayerDeath);
     }
 
     private IEnumerator WaitForDeathAnimation()

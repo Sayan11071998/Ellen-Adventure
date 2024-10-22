@@ -47,6 +47,8 @@ public class EnemyChomperController : MonoBehaviour
         {
             Flip();
         }
+
+        AudioManager.Instance.PlayEnemyFootestepAudio(AudioTypeList.EnemyFootstep);
     }
 
     void Flip()
