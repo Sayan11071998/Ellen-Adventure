@@ -22,13 +22,14 @@ public class GameOverUIController : MonoBehaviour
 
     public void ReloadLevel()
     {
-        Debug.Log("Reloading Level");
+        AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_Restart);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
 
     public void ReturnToLobby()
     {
+        AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_MainMenu);
         SceneManager.LoadScene(0);
     }
 }

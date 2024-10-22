@@ -2,21 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// public class CameraFollow : MonoBehaviour
-// {
-//     [SerializeField] private Transform cameraTargetObject;
-//     [SerializeField] private Vector3 cameraOffsetValue;
-//     [SerializeField] private Camera mainCamera;
-
-//     void Update()
-//     {
-//         if (mainCamera != null)
-//         {
-//             transform.position = cameraTargetObject.position + cameraOffsetValue;
-//         }
-//     }
-// }
-
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform cameraTargetObject;

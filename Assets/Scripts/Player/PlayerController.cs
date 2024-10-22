@@ -16,11 +16,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float playerHorizontalSpeed;
     [SerializeField] private float playerVerticalJumpHeight;
+    [SerializeField] private float footstepDelay = 0.5f;  // Time between each footstep sound
     [SerializeField] private int playerMaxNumberOfHealths;
 
     private int currentHealth;
     private Vector2 boxColInitSize;
     private Vector2 boxColInitOffset;
+    private float nextFootstepTime = 0f;
     private bool isGrounded;
     private bool isCrouch = false;
     private bool isHurt = false;
@@ -33,7 +35,6 @@ public class PlayerController : MonoBehaviour
         playerRigidBody2d = gameObject.GetComponent<Rigidbody2D>();
         playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         gameUIController = FindObjectOfType<GameUIController>();
-        // gameOverUIController = FindObjectOfType<GameOverUIController>();
     }
 
     private void Start()
@@ -86,7 +87,11 @@ public class PlayerController : MonoBehaviour
         }
         transform.localScale = localScale;
 
-        AudioManager.Instance.PlayPlayerWalkAudio(AudioTypeList.playerFootstep);
+        if (Time.time >= nextFootstepTime)
+        {
+            AudioManager.Instance.PlayPlayerWalkAudio(AudioTypeList.playerFootstep);
+            nextFootstepTime = Time.time + footstepDelay;
+        }
     }
 
     public void PlayerJump()
@@ -94,6 +99,7 @@ public class PlayerController : MonoBehaviour
         playerRigidBody2d.velocity = new Vector2(playerRigidBody2d.velocity.x, playerVerticalJumpHeight);
         isGrounded = false;
         playerAnimator.SetBool("Jump", true);
+
         AudioManager.Instance.PlayPlayerJumpAudio(AudioTypeList.PlayerJump);
     }
 

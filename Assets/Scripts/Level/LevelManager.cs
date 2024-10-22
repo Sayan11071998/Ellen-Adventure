@@ -26,9 +26,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         if (GetLevelStatus(Levels[0]) == LevelStatus.LOCKED)
-        {
             SetLevelStatus(Levels[0], LevelStatus.UNLOCKED);
-        }
     }
 
     public void MarkCurrentLevelComplete()
@@ -43,7 +41,7 @@ public class LevelManager : MonoBehaviour
     {
         int currentSceneIndex = Array.FindIndex(Levels, level => level == currentScene.name);
         int nextSceneIndex = currentSceneIndex + 1;
-        
+
         if (CheckIfValidLevel(nextSceneIndex))
             SetLevelStatus(Levels[nextSceneIndex], LevelStatus.UNLOCKED);
     }
@@ -65,6 +63,5 @@ public class LevelManager : MonoBehaviour
     public void SetLevelStatus(string level, LevelStatus levelStatus)
     {
         PlayerPrefs.SetInt(level, (int)levelStatus);
-        Debug.Log("Setting Level: " + level + " status: " + levelStatus);
     }
 }
