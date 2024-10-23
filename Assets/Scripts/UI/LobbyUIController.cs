@@ -18,12 +18,13 @@ public class LobbyUIController : MonoBehaviour
 
     public void PlayGame()
     {
-        AudioManager.Instance.PlayBGM(AudioTypeList.BackGroundMusic);
+        AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_NextLevel_Restart);
         LevelSelection.SetActive(true);
     }
 
     public void QuitGame()
     {
+        AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_MainMenu_Back);
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else

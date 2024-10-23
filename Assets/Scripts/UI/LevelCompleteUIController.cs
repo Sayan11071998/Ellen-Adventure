@@ -21,13 +21,14 @@ public class LevelCompleteUIController : MonoBehaviour
 
         if (LevelManager.Instance.CheckIfValidLevel(nextSceneIndex))
         {
+            AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_NextLevel_Restart);
             SceneManager.LoadScene(nextSceneIndex);
-
         }
     }
 
     public void ReturnToLobby()
     {
+        AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_MainMenu_Back);
         SceneManager.LoadScene(0);
     }
 }

@@ -31,7 +31,7 @@ public class LevelLoader : MonoBehaviour
                 SceneManager.LoadScene(LevelName);
                 break;
             case LevelStatus.COMPLETED:
-                AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_NextLevel);
+                AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_NextLevel_Restart);
                 SceneManager.LoadScene(LevelName);
                 break;
         }
