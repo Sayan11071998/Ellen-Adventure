@@ -10,17 +10,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private BoxCollider2D playerBoxCollider2d;
     [SerializeField] private Rigidbody2D playerRigidBody2d;
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private GameUIController gameUIController;
     [SerializeField] private GameOverUIController gameOverUIController;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float playerHorizontalSpeed;
     [SerializeField] private float playerVerticalJumpHeight;
+    [SerializeField] private float footstepDelay = 0.5f;  // Time between each footstep sound
     [SerializeField] private int playerMaxNumberOfHealths;
 
     private int currentHealth;
     private Vector2 boxColInitSize;
     private Vector2 boxColInitOffset;
-    private bool isGrounded;
+    private float nextFootstepTime = 0f;
+    private bool isTouchingGround;
+    private bool isJumping;
+    // private bool isGrounded;
     private bool isCrouch = false;
     private bool isHurt = false;
     private bool isDead = false;
@@ -30,8 +37,8 @@ public class PlayerController : MonoBehaviour
         playerAnimator = gameObject.GetComponent<Animator>();
         playerBoxCollider2d = gameObject.GetComponent<BoxCollider2D>();
         playerRigidBody2d = gameObject.GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         gameUIController = FindObjectOfType<GameUIController>();
-        // gameOverUIController = FindObjectOfType<GameOverUIController>();
     }
 
     private void Start()
@@ -44,29 +51,24 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
+        isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         if (!isDead)
         {
             PlayerMovement(horizontalInput);
-            PlayMovementAnimation(horizontalInput);
+            PlayerJump();
             PlayerCrouch();
         }
     }
 
-    private void FixedUpdate()
+    private void PlayerMovement(float horizontalInput)
     {
-        if (Input.GetButton("Jump") && isGrounded)
-        {
-            PlayerJump();
-        }
-    }
-
-    public void PlayerMovement(float horizontalInput)
-    {
-        if (!isCrouch)
+        if (!isCrouch && !isJumping)
         {
             playerRigidBody2d.velocity = new Vector2(horizontalInput * playerHorizontalSpeed, playerRigidBody2d.velocity.y);
+            PlayMovementAnimation(horizontalInput);
         }
+
     }
 
     public void PlayMovementAnimation(float horizontalInput)
@@ -74,40 +76,37 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         Vector2 localScale = transform.localScale;
         if (horizontalInput < 0)
-        {
             localScale.x = -1f * Mathf.Abs(localScale.x);
-        }
         else if (horizontalInput > 0)
-        {
             localScale.x = Mathf.Abs(localScale.x);
-        }
+
         transform.localScale = localScale;
     }
 
-    public void PlayerJump()
+    void PlayerJump()
     {
-        playerRigidBody2d.velocity = new Vector2(playerRigidBody2d.velocity.x, playerVerticalJumpHeight);
-        isGrounded = false;
-        playerAnimator.SetBool("Jump", true);
-    }
-
-    public void PlayerGroundedCheck()
-    {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, groundLayer);
+        if (Input.GetButtonDown("Jump") && isTouchingGround)
+        {
+            playerRigidBody2d.velocity = new Vector2(playerRigidBody2d.velocity.x, playerVerticalJumpHeight);
+            isJumping = true;
+            AudioManager.Instance.PlaySFX(AudioTypeList.PlayerJump);
+            playerAnimator.SetBool("Jump", isTouchingGround);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            isTouchingGround = true;
+            isJumping = false;
             playerAnimator.SetBool("Jump", false);
         }
     }
 
     public void PlayerCrouch()
     {
-        if (isGrounded && Input.GetKey(KeyCode.LeftControl))
+        if (isTouchingGround && Input.GetKey(KeyCode.LeftControl))
             isCrouch = true;
         else
             isCrouch = false;
@@ -196,7 +195,9 @@ public class PlayerController : MonoBehaviour
     public void PlayDeathAnimation()
     {
         Debug.Log("Play Death Animation");
-        playerAnimator.SetBool("isDead", true);
+        // playerAnimator.SetBool("isDead", true);
+        playerAnimator.SetTrigger("Dead");
+        AudioManager.Instance.PlayPlayerDeathAudio(AudioTypeList.PlayerDeath);
     }
 
     private IEnumerator WaitForDeathAnimation()
@@ -212,5 +213,14 @@ public class PlayerController : MonoBehaviour
     public int getPlayerLives()
     {
         return playerMaxNumberOfHealths;
+    }
+
+    public void DisablePlayerSprite()
+    {
+        this.enabled = false;
+        playerRigidBody2d.velocity = Vector2.zero;
+        playerRigidBody2d.isKinematic = true;
+        playerAnimator.enabled = false;
+        playerSpriteRenderer.enabled = false;
     }
 }

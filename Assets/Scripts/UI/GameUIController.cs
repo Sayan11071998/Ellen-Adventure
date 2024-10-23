@@ -25,6 +25,12 @@ public class GameUIController : MonoBehaviour
         }
 
         RefreshUI();
+
+        AudioManager.Instance.MuteAudioSource(AudioSourceList.audioSourcePlayer, false);
+        AudioManager.Instance.MuteAudioSource(AudioSourceList.audioSourceEnemy, false);
+        AudioManager.Instance.MuteAudioSource(AudioSourceList.audioSourceSFX, false);
+        AudioManager.Instance.MuteAudioSource(AudioSourceList.audioSourceBGM, false);
+        AudioManager.Instance.PlayBGM(AudioTypeList.BackGroundMusic);
     }
 
     private void Update()

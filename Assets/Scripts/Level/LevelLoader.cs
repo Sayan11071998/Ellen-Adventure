@@ -7,8 +7,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class LevelLoader : MonoBehaviour
 {
-    private Button button;
-    public string LevelName;
+    [SerializeField] private Button button;
+    [SerializeField] private string LevelName;
 
     private void Awake()
     {
@@ -18,6 +18,22 @@ public class LevelLoader : MonoBehaviour
 
     private void OnCLick()
     {
-        SceneManager.LoadScene(LevelName);
+        // Question? How can we use this here?
+        LevelStatus levelStatus = LevelManager.Instance.GetLevelStatus(LevelName);
+        switch (levelStatus)
+        {
+            case LevelStatus.LOCKED:
+                Debug.Log("Can't play this Level till you unlock it");
+                AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_Locked);
+                break;
+            case LevelStatus.UNLOCKED:
+                AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_Unlocked);
+                SceneManager.LoadScene(LevelName);
+                break;
+            case LevelStatus.COMPLETED:
+                AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_NextLevel_Restart);
+                SceneManager.LoadScene(LevelName);
+                break;
+        }
     }
 }
