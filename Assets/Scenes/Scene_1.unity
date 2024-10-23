@@ -2849,18 +2849,13 @@ PrefabInstance:
       objectReference: {fileID: 1156685511}
     - target: {fileID: 7452623053172902468, guid: 61f45004cf7649c41be956d51d949fa4,
         type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7452623053172902468, guid: 61f45004cf7649c41be956d51d949fa4,
-        type: 3}
       propertyPath: gameOverUIController
       value: 
       objectReference: {fileID: 297011337}
     - target: {fileID: 7452623053172902468, guid: 61f45004cf7649c41be956d51d949fa4,
         type: 3}
       propertyPath: playerVerticalJumpHeight
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

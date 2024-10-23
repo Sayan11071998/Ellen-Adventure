@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private GameUIController gameUIController;
     [SerializeField] private GameOverUIController gameOverUIController;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float playerHorizontalSpeed;
     [SerializeField] private float playerVerticalJumpHeight;
@@ -23,7 +25,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 boxColInitSize;
     private Vector2 boxColInitOffset;
     private float nextFootstepTime = 0f;
-    private bool isGrounded;
+    private bool isTouchingGround;
+    private bool isJumping;
+    // private bool isGrounded;
     private bool isCrouch = false;
     private bool isHurt = false;
     private bool isDead = false;
@@ -47,30 +51,24 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
+        isTouchingGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         if (!isDead)
         {
             PlayerMovement(horizontalInput);
-            PlayMovementAnimation(horizontalInput);
+            PlayerJump();
             PlayerCrouch();
         }
     }
 
-    private void FixedUpdate()
+    private void PlayerMovement(float horizontalInput)
     {
-        // isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, groundLayer);
-        if (Input.GetButton("Jump") && isGrounded)
-        {
-            PlayerJump();
-        }
-    }
-
-    public void PlayerMovement(float horizontalInput)
-    {
-        if (!isCrouch)
+        if (!isCrouch && !isJumping)
         {
             playerRigidBody2d.velocity = new Vector2(horizontalInput * playerHorizontalSpeed, playerRigidBody2d.velocity.y);
+            PlayMovementAnimation(horizontalInput);
         }
+
     }
 
     public void PlayMovementAnimation(float horizontalInput)
@@ -78,48 +76,37 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         Vector2 localScale = transform.localScale;
         if (horizontalInput < 0)
-        {
             localScale.x = -1f * Mathf.Abs(localScale.x);
-        }
         else if (horizontalInput > 0)
-        {
             localScale.x = Mathf.Abs(localScale.x);
-        }
+
         transform.localScale = localScale;
+    }
 
-        if (Time.time >= nextFootstepTime)
+    void PlayerJump()
+    {
+        if (Input.GetButtonDown("Jump") && isTouchingGround)
         {
-            AudioManager.Instance.PlayPlayerWalkAudio(AudioTypeList.playerFootstep);
-            nextFootstepTime = Time.time + footstepDelay;
+            playerRigidBody2d.velocity = new Vector2(playerRigidBody2d.velocity.x, playerVerticalJumpHeight);
+            isJumping = true;
+            AudioManager.Instance.PlaySFX(AudioTypeList.PlayerJump);
+            playerAnimator.SetBool("Jump", isTouchingGround);
         }
-    }
-
-    public void PlayerJump()
-    {
-        playerRigidBody2d.velocity = new Vector2(playerRigidBody2d.velocity.x, playerVerticalJumpHeight);
-        isGrounded = false;
-        playerAnimator.SetBool("Jump", true);
-
-        AudioManager.Instance.PlayPlayerJumpAudio(AudioTypeList.PlayerJump);
-    }
-
-    public void PlayerGroundedCheck()
-    {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, groundLayer);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            isTouchingGround = true;
+            isJumping = false;
             playerAnimator.SetBool("Jump", false);
         }
     }
 
     public void PlayerCrouch()
     {
-        if (isGrounded && Input.GetKey(KeyCode.LeftControl))
+        if (isTouchingGround && Input.GetKey(KeyCode.LeftControl))
             isCrouch = true;
         else
             isCrouch = false;
