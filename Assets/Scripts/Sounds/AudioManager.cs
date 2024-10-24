@@ -162,6 +162,7 @@ public enum AudioTypeList
     MenuButtonClick_MainMenu_Back,
     playerFootstep,
     PlayerJump,
+    PlayerHurt,
     PlayerDeath,
     EnemyFootstep,
     KeyPickup,

@@ -29,6 +29,6 @@ public class LevelCompleteUIController : MonoBehaviour
     public void ReturnToLobby()
     {
         AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_MainMenu_Back);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }

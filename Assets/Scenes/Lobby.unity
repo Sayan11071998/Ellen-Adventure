@@ -1412,13 +1412,13 @@ MonoBehaviour:
   - audioType: 6
     audioClip: {fileID: 8300000, guid: e5cb0976ee7cf93489107ede5175519b, type: 3}
   - audioType: 7
-    audioClip: {fileID: 8300000, guid: 516604db9dbf00141b71b702c4fd79c4, type: 3}
+    audioClip: {fileID: 8300000, guid: d50f2e0626e662041aa8a2ff5f8ebcc6, type: 3}
   - audioType: 8
-    audioClip: {fileID: 8300000, guid: 2efac6b1f1b3cb84f8090b80da4bf152, type: 3}
+    audioClip: {fileID: 8300000, guid: 516604db9dbf00141b71b702c4fd79c4, type: 3}
   - audioType: 9
-    audioClip: {fileID: 8300000, guid: 8d331b50969371c4db3319a915ef2cad, type: 3}
+    audioClip: {fileID: 8300000, guid: 2efac6b1f1b3cb84f8090b80da4bf152, type: 3}
   - audioType: 10
-    audioClip: {fileID: 8300000, guid: 31b2284e8ab3f244182080ca7da474b7, type: 3}
+    audioClip: {fileID: 8300000, guid: 8d331b50969371c4db3319a915ef2cad, type: 3}
   isMute: 0
   bgmVolume: 0.2
   sfxVolume: 0.5
