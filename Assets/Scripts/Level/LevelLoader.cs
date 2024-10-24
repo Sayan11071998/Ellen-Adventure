@@ -18,7 +18,6 @@ public class LevelLoader : MonoBehaviour
 
     private void OnCLick()
     {
-        // Question? How can we use this here?
         LevelStatus levelStatus = LevelManager.Instance.GetLevelStatus(LevelName);
         switch (levelStatus)
         {

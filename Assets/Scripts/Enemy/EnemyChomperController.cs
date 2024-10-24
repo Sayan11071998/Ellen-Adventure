@@ -11,11 +11,10 @@ public class EnemyChomperController : MonoBehaviour
     [SerializeField] private float enemyPatrolspeed;
     [SerializeField] private Transform groundDetector;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float footstepDelay = 0.5f;  // Time between each footstep sound
+    [SerializeField] private float footstepDelay = 0.5f;
 
     private bool isFacingRIght = true;
     private float nextFootstepTime = 0f;
-    private bool hasAttackedPlayer = false;
 
     private void Awake()
     {
@@ -37,33 +36,23 @@ public class EnemyChomperController : MonoBehaviour
         if (playerController != null)
         {
             playerController.DecreasePlayerHealth(1);
-            hasAttackedPlayer = true;
+
         }
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-
-        if (playerController != null)
-            hasAttackedPlayer = false;
-
     }
 
     void Patrol()
     {
         transform.Translate(Vector2.right * enemyPatrolspeed * Time.deltaTime);
         enemyChomperAnimator.SetBool("IsPatrolling", true);
-        
+
         RaycastHit2D hit = Physics2D.Raycast(groundDetector.position, Vector2.down, 1f, groundLayer);
 
         if (hit.collider == false)
             Flip();
 
-        // Play footstep sound at intervals
         if (Time.time >= nextFootstepTime)
         {
-            AudioManager.Instance.PlayEnemyFootestepAudio(AudioTypeList.EnemyFootstep);
+            AudioManager.Instance.PlayBGM(AudioTypeList.EnemyFootstep);
             nextFootstepTime = Time.time + footstepDelay;
         }
     }
