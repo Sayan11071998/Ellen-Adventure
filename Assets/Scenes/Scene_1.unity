@@ -2852,11 +2852,6 @@ PrefabInstance:
       propertyPath: gameOverUIController
       value: 
       objectReference: {fileID: 297011337}
-    - target: {fileID: 7452623053172902468, guid: 61f45004cf7649c41be956d51d949fa4,
-        type: 3}
-      propertyPath: playerVerticalJumpHeight
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5235,12 +5230,12 @@ PrefabInstance:
     - target: {fileID: 356132858921170354, guid: b46dd25eb5518864e976b9e57da8f02b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.2664
+      value: 3.52
       objectReference: {fileID: 0}
     - target: {fileID: 356132858921170354, guid: b46dd25eb5518864e976b9e57da8f02b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5056
+      value: -2.35
       objectReference: {fileID: 0}
     - target: {fileID: 356132858921170354, guid: b46dd25eb5518864e976b9e57da8f02b,
         type: 3}

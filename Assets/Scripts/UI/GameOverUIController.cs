@@ -30,6 +30,7 @@ public class GameOverUIController : MonoBehaviour
     public void ReturnToLobby()
     {
         AudioManager.Instance.PlaySFX(AudioTypeList.MenuButtonClick_MainMenu_Back);
+        this.gameObject.SetActive(false);
         SceneManager.LoadScene(0);
     }
 }

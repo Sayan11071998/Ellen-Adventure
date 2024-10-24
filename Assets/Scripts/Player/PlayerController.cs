@@ -18,16 +18,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float playerHorizontalSpeed;
     [SerializeField] private float playerVerticalJumpHeight;
-    [SerializeField] private float footstepDelay = 0.5f;  // Time between each footstep sound
+    // [SerializeField] private float footstepDelay = 0.5f;  // Time between each footstep sound
     [SerializeField] private int playerMaxNumberOfHealths;
 
     private int currentHealth;
     private Vector2 boxColInitSize;
     private Vector2 boxColInitOffset;
-    private float nextFootstepTime = 0f;
+    // private float nextFootstepTime = 0f;
     private bool isTouchingGround;
-    private bool isJumping;
-    // private bool isGrounded;
     private bool isCrouch = false;
     private bool isHurt = false;
     private bool isDead = false;
@@ -63,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovement(float horizontalInput)
     {
-        if (!isCrouch && !isJumping)
+        if (!isCrouch)
         {
             playerRigidBody2d.velocity = new Vector2(horizontalInput * playerHorizontalSpeed, playerRigidBody2d.velocity.y);
             PlayMovementAnimation(horizontalInput);
@@ -88,7 +86,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isTouchingGround)
         {
             playerRigidBody2d.velocity = new Vector2(playerRigidBody2d.velocity.x, playerVerticalJumpHeight);
-            isJumping = true;
             AudioManager.Instance.PlaySFX(AudioTypeList.PlayerJump);
             playerAnimator.SetBool("Jump", isTouchingGround);
         }
@@ -99,7 +96,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isTouchingGround = true;
-            isJumping = false;
             playerAnimator.SetBool("Jump", false);
         }
     }
@@ -144,7 +140,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isHurt || isDead) return;
 
-        playerMaxNumberOfHealths -= damageValue;
+        currentHealth -= damageValue;
         PlayHurtAnimation();
         CheckPlayerDeathCondition();
     }
@@ -153,6 +149,7 @@ public class PlayerController : MonoBehaviour
     {
         isHurt = true;
         playerAnimator.SetBool("isHurt", true);
+        AudioManager.Instance.PlaySFX(AudioTypeList.PlayerHurt);
         StartCoroutine(DisableMovementForHurt());
         StartCoroutine(ResetHurtStatusAfterAnimation());
     }
@@ -161,58 +158,51 @@ public class PlayerController : MonoBehaviour
     {
         playerRigidBody2d.velocity = Vector2.zero;
         playerRigidBody2d.isKinematic = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         playerRigidBody2d.isKinematic = false;
     }
 
     private IEnumerator ResetHurtStatusAfterAnimation()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         isHurt = false;
         playerAnimator.SetBool("isHurt", false);
     }
 
     public void CheckPlayerDeathCondition()
     {
-        if (playerMaxNumberOfHealths < 1)
-        {
+        if (currentHealth < 1)
             KillPlayer();
-        }
     }
 
     public void KillPlayer()
     {
         if (isDead) return;
-
         isDead = true;
-        Debug.Log("Player Killed by Enemy!!");
-        PlayDeathAnimation();
+
         playerRigidBody2d.velocity = Vector2.zero;
         playerRigidBody2d.isKinematic = true;
-        StartCoroutine(WaitForDeathAnimation());
+
+        PlayDeathAnimation();
     }
 
     public void PlayDeathAnimation()
     {
-        Debug.Log("Play Death Animation");
-        // playerAnimator.SetBool("isDead", true);
-        playerAnimator.SetTrigger("Dead");
-        AudioManager.Instance.PlayPlayerDeathAudio(AudioTypeList.PlayerDeath);
+        playerAnimator.SetBool("isDead", true);
+        AudioManager.Instance.PlaySFX(AudioTypeList.PlayerDeath);
+        StartCoroutine(WaitForDeathAnimation());
     }
 
     private IEnumerator WaitForDeathAnimation()
     {
-        Debug.Log("Inside Wait for Death Animation");
-
         float deathAnimationDuration = playerAnimator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(deathAnimationDuration + 2);
-        // ReloadLevel();
+        yield return new WaitForSeconds(deathAnimationDuration + 1.5f);
         gameOverUIController.PlayerDied();
     }
 
     public int getPlayerLives()
     {
-        return playerMaxNumberOfHealths;
+        return currentHealth;
     }
 
     public void DisablePlayerSprite()

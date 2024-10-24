@@ -39,14 +39,14 @@ public class AudioManager : MonoBehaviour
         PlayBGM(global::AudioTypeList.BackGroundMusic);
     }
 
-    // public void Mute(bool status)
-    // {
-    //     isMute = status;
-    //     audioSourceBGM.mute = status;
-    //     audioSourceSFX.mute = status;
-    //     audioSourcePlayer.mute = status;
-    //     audioSourceEnemy.mute = status;
-    // }
+    public void Mute(bool status)
+    {
+        isMute = status;
+        audioSourceBGM.mute = status;
+        audioSourceSFX.mute = status;
+        // audioSourcePlayer.mute = status;
+        // audioSourceEnemy.mute = status;
+    }
 
     public void SetGameVolume(float bgmVolume, float sfxVolume)
     {
@@ -60,28 +60,6 @@ public class AudioManager : MonoBehaviour
         if (audioItem != null)
             return audioItem.audioClip;
         return null;
-    }
-
-    public void MuteAudioSource(AudioSourceList sourceName, bool value)
-    {
-        switch (sourceName)
-        {
-            case AudioSourceList.audioSourcePlayer:
-                audioSourcePlayer.mute = value;
-                break;
-
-            case AudioSourceList.audioSourceEnemy:
-                audioSourceEnemy.mute = value;
-                break;
-
-            case AudioSourceList.audioSourceSFX:
-                audioSourceSFX.mute = value;
-                break;
-
-            case AudioSourceList.audioSourceBGM:
-                audioSourceBGM.mute = value;
-                break;
-        }
     }
 
     public void PlayBGM(AudioTypeList audio)
@@ -124,17 +102,6 @@ public class AudioManager : MonoBehaviour
         audioSourcePlayer.PlayOneShot(clip);
     }
 
-    public void PlayEnemyFootestepAudio(AudioTypeList audio)
-    {
-        if (isMute) return;
-
-        AudioClip clip = GetAudioClip(audio);
-        if (clip == null) return;
-
-        audioSourceEnemy.clip = clip;
-        audioSourceEnemy.Play();
-    }
-
     public void PlayPlayerDeathAudio(AudioTypeList audio)
     {
         if (isMute) return;
@@ -162,16 +129,9 @@ public enum AudioTypeList
     MenuButtonClick_MainMenu_Back,
     playerFootstep,
     PlayerJump,
+    PlayerHurt,
     PlayerDeath,
     EnemyFootstep,
     KeyPickup,
     LevelComplete
-}
-
-public enum AudioSourceList
-{
-    audioSourceSFX,
-    audioSourceBGM,
-    audioSourcePlayer,
-    audioSourceEnemy,
 }

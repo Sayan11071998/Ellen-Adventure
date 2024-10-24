@@ -14,8 +14,6 @@ public class LevelCompleteController : MonoBehaviour
         if (playerController != null)
         {
             AudioManager.Instance.PlaySFX(AudioTypeList.LevelComplete);
-            AudioManager.Instance.MuteAudioSource(AudioSourceList.audioSourcePlayer, true);
-            AudioManager.Instance.MuteAudioSource(AudioSourceList.audioSourceEnemy, true);
 
             playerController.DisablePlayerSprite();
             LevelManager.Instance.MarkCurrentLevelComplete();

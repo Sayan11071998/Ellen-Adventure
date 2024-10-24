@@ -14,7 +14,7 @@ public class FallDetectionController : MonoBehaviour
 
         if (playerController != null)
         {
-            AudioManager.Instance.PlayPlayerDeathAudio(AudioTypeList.PlayerDeath);
+            AudioManager.Instance.PlaySFX(AudioTypeList.PlayerDeath);
             gameOverUIController.PlayerDied();
         }
     }

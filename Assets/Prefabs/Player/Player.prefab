@@ -237,6 +237,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   playerHorizontalSpeed: 10
-  playerVerticalJumpHeight: 8
+  playerVerticalJumpHeight: 12
   footstepDelay: 0.5
   playerMaxNumberOfHealths: 3
