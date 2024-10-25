@@ -44,8 +44,6 @@ public class AudioManager : MonoBehaviour
         isMute = status;
         audioSourceBGM.mute = status;
         audioSourceSFX.mute = status;
-        // audioSourcePlayer.mute = status;
-        // audioSourceEnemy.mute = status;
     }
 
     public void SetGameVolume(float bgmVolume, float sfxVolume)
@@ -81,35 +79,6 @@ public class AudioManager : MonoBehaviour
         if (clip == null) return;
 
         audioSourceSFX.PlayOneShot(clip);
-    }
-
-    public void PlayPlayerWalkAudio(AudioTypeList audio)
-    {
-        if (isMute) return;
-        
-        AudioClip clip = GetAudioClip(audio);
-        if (clip == null) return;
-
-        audioSourcePlayer.clip = clip;
-        audioSourcePlayer.Play();
-    }
-
-    public void PlayPlayerJumpAudio(AudioTypeList audio)
-    {
-        if (isMute) return;
-        AudioClip clip = GetAudioClip(audio);
-        if (clip == null) return;
-        audioSourcePlayer.PlayOneShot(clip);
-    }
-
-    public void PlayPlayerDeathAudio(AudioTypeList audio)
-    {
-        if (isMute) return;
-
-        AudioClip clip = GetAudioClip(audio);
-        if (clip == null) return;
-
-        audioSourcePlayer.PlayOneShot(clip);
     }
 }
 
