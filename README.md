@@ -22,3 +22,11 @@ Ellen Adventure is a 2D platformer developed in Unity, where players navigate th
 And yes, Ellen Adventure may have a shaky jump animation that I’ll definitely refine (one day!) and Coroutines are my next quest for smoother transitions. But despite the long hours, all-nighters, and slightly jittery animations, I couldn’t be prouder of how this first project turned out!
 
 Looking forward to sharing more (hopefully polished) Unity projects soon! 🌟👾
+
+![EllenAdventure_1](https://github.com/user-attachments/assets/7c83d545-918e-4792-9fca-5e1b3f74762d)
+
+![EllenAdventure_2](https://github.com/user-attachments/assets/ada23f77-f173-46a3-9ee1-156467aa452d)
+
+![EllenAdventure_3](https://github.com/user-attachments/assets/08a8defe-c0ef-4f75-a43f-44af954a98bf)
+
+![EllenAdventure_4](https://github.com/user-attachments/assets/40583314-e6f5-4b66-9689-050f882ef1f5)
