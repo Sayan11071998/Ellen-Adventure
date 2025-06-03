@@ -57,6 +57,11 @@ Yes, Ellen’s jump animation might still need a little polish (and coroutines a
 
 Stay tuned for what’s next in my Unity dev journey!
 
+---
+
+## Play Link
+https://sayannandi.itch.io/ellen-adventure
+
 [![Watch the video](https://img.youtube.com/vi/qYYInSu7jbI/maxresdefault.jpg)](https://youtu.be/qYYInSu7jbI)
 ### [Gameplay Video](https://youtu.be/qYYInSu7jbI)
 
